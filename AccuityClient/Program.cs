@@ -41,29 +41,6 @@ namespace AccuityClient
 
                         var message = client.ReceiveFrameString();
                         Debug.WriteLine($"{0}");
-
-                        //using (var stream = new MemoryStream())
-                        //using (var writer = new StreamWriter(stream))
-                        //using (var csvWriter = new CsvWriter(writer, CultureInfo.InvariantCulture))
-                        //{
-                        //    csvWriter.NextRecord();
-                        //    csvWriter.WriteRecord<Person>(person);
-                        //    csvWriter.NextRecord();
-                        //    writer.Flush();
-                        //    stream.Seek(0, SeekOrigin.Begin);
-
-                        //    using (StreamReader tmpReader = new StreamReader(stream))
-                        //    {
-                        //        string data = tmpReader.ReadToEnd();
-
-                        //        Debug.WriteLine($"Sending {data}");
-
-                        //        client.SendFrame(data);
-
-                        //        var message = client.ReceiveFrameString();
-                        //        Debug.WriteLine($"{0}");
-                        //    }
-                        //}
                     }
                 }
             }
