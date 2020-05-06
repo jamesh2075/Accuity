@@ -35,28 +35,35 @@ namespace AccuityClient
                             continue;
                         }
 
-                        using (var stream = new MemoryStream())
-                        using (var writer = new StreamWriter(stream))
-                        using (var csvWriter = new CsvWriter(writer, CultureInfo.InvariantCulture))
-                        {
-                            csvWriter.NextRecord();
-                            csvWriter.WriteRecord<Person>(person);
-                            csvWriter.NextRecord();
-                            writer.Flush();
-                            stream.Seek(0, SeekOrigin.Begin);
+                        string data = $"{person.id},{person.FirstName},{person.LastName},{person.City},{person.State},{person.Country}";
+                        Debug.WriteLine($"Sending {data}");
+                        client.SendFrame(data);
 
-                            using (StreamReader tmpReader = new StreamReader(stream))
-                            {
-                                string data = tmpReader.ReadToEnd();
+                        var message = client.ReceiveFrameString();
+                        Debug.WriteLine($"{0}");
 
-                                Debug.WriteLine($"Sending {data}");
+                        //using (var stream = new MemoryStream())
+                        //using (var writer = new StreamWriter(stream))
+                        //using (var csvWriter = new CsvWriter(writer, CultureInfo.InvariantCulture))
+                        //{
+                        //    csvWriter.NextRecord();
+                        //    csvWriter.WriteRecord<Person>(person);
+                        //    csvWriter.NextRecord();
+                        //    writer.Flush();
+                        //    stream.Seek(0, SeekOrigin.Begin);
 
-                                client.SendFrame(data);
+                        //    using (StreamReader tmpReader = new StreamReader(stream))
+                        //    {
+                        //        string data = tmpReader.ReadToEnd();
 
-                                var message = client.ReceiveFrameString();
-                                Debug.WriteLine($"{0}");
-                            }
-                        }
+                        //        Debug.WriteLine($"Sending {data}");
+
+                        //        client.SendFrame(data);
+
+                        //        var message = client.ReceiveFrameString();
+                        //        Debug.WriteLine($"{0}");
+                        //    }
+                        //}
                     }
                 }
             }
